@@ -1,13 +1,13 @@
 const fs = require("fs");
 
-// need inquirer variable here
+
 const inquirer = require("inquirer");
 
-// need a markdown js file here
-const generateMarkdown = require("./utils/generateMarkdown");
+
+const generateTheMarkdown = require("./utils/generateMarkdown");
 
 
-// License function and  if/else section here 
+
 
 
 
@@ -15,7 +15,7 @@ function validateInput(value) {
     if (value != "") {
         return true;
     } else {
-        return "Please answer the question with some kind on input.";
+        return "Please answer the question.";
     }
 }
 
@@ -25,18 +25,18 @@ const questions = [
     {
         type: "input",
         name: "title",
-        message: "What is the title of your project?",
+        message: "What is the title of the project?",
         validate: validateInput,
     },
     // Question for the project Description
     {
         type: "input",
         name: "description",
-        message: "Please enter a description of your project.",
+        message: "Please enter a description of the project.",
         validate: validateInput,
     },
 
-    // Table of Contents, andling this in the markdown.js
+   
 
     // Question for Installation
     {
@@ -50,7 +50,7 @@ const questions = [
     {
         type: "input",
         name: "usage",
-        message: "Please describe how we can use this program/project.",
+        message: "Please describe how we can use the program.",
         validate: validateInput,
     },
 
@@ -58,7 +58,7 @@ const questions = [
     {
         type: "list",
         name: "license",
-        message: "Please select a license for this project.",
+        message: "Please select a license for this project below.",
         choices: [
             "GNU AGPLv3",
             "GNU GPLv3",
@@ -75,7 +75,7 @@ const questions = [
     {
         type: "input",
         name: "contributing",
-        message: "How can users contribute to your project.",
+        message: "How can users help to contribute to your project.",
         validate: validateInput,
     },
 
@@ -83,7 +83,7 @@ const questions = [
     {
         type: "input",
         name: "tests",
-        message: "Please enter any testing instructions you would like to provide for this project.",
+        message: "Please enter any further testing instructions you would like to provide for this project.",
         validate: validateInput,
     },
 
@@ -111,7 +111,6 @@ const questions = [
 ];
 
 
-// function to generate the ReadMe here
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, generateMarkdown(data), function (err) {
         if (err) {
@@ -121,7 +120,7 @@ function writeToFile(fileName, data) {
 }
 
 
-// function to initalize the beginning of the questions 
+
 function init() {
     inquirer.prompt(questions).then((data) => {
         console.log(JSON.stringify(data, null, " "));
@@ -130,5 +129,5 @@ function init() {
     });
 }
 
-// call the function to initalize the beginning of the questions 
+
 init();
